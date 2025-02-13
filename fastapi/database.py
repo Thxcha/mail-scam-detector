@@ -3,7 +3,7 @@ from databases import Database
 
 POSTGRES_USER = "temp"
 POSTGRES_PASSWORD = "temp"
-POSTGRES_DB = "advcompro"
+POSTGRES_DB = "mailscam"
 POSTGRES_HOST = "db"
 
 
