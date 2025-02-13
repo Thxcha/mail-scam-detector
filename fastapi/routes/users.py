@@ -91,7 +91,7 @@ async def login_user(user: UserLogin):
        raise HTTPException(status_code=404, detail="User not found")
 
 
-   # If login is successful, you can return user info (omit password hash)
+# If login is successful, you can return user info (omit password hash)
    return {
        "user_id": db_user.user_id,
        "username": db_user.username,
