@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime
 from database import *  # Ensure your database functions are imported
-
+import joblib
 
 router = APIRouter()
 
@@ -36,7 +36,30 @@ class UserLogin(BaseModel):
    email: str
    password_hash: str
 
+# Pydantic model for text_input
+class UserInput(BaseModel):
+   user_input : str
+   
+# Load the trained model
+MODEL_PATH = "routes/model.joblib"
 
+try:
+    loaded_model = joblib.load(MODEL_PATH)
+    print(f"Model '{MODEL_PATH}' loaded successfully!")
+except FileNotFoundError:
+    print(f"Error: Model file '{MODEL_PATH}' not found. Train and save the model first.")
+    exit()
+
+@router.get("/users/predict")
+async def read_user_item(user_input: str):
+    # Predict category
+    prediction = loaded_model.predict([user_input])[0]
+    probabilities = loaded_model.predict_proba([user_input])[0]  # Get confidence scores
+
+    # Extract confidence score for the predicted class
+    confidence_score = max(probabilities)
+    return prediction,confidence_score
+ 
 # Endpoint to create a new user
 @router.post("/users/create", response_model=User)
 async def create_user(user: UserCreate):

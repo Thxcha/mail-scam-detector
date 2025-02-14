@@ -2,3 +2,6 @@ fastapi[standard]
 uvicorn
 databases[asyncpg]
 pydantic
+joblib
+pathlib
+scikit-learn
