@@ -22,33 +22,6 @@ const NavigationLayout = ({ children }) => {
 
   return (
     <>
-      <AppBar position="sticky" sx={{ backgroundColor: "#ff5e15" }}>
-        <Toolbar>
-          <Link href={"/"}>
-            <FunctionsIcon sx={{ color: "#ffffff" }} fontSize="large" />
-          </Link>
-          <Typography
-            variant="body1"
-            sx={{
-              fontSize: "22px",
-              fontWeight: 500,
-              color: "#ffffff",
-              padding: "0 10px",
-              fontFamily: "Prompt",
-            }}>
-            {appName}
-          </Typography>
-          <NavigationLink href="/page1" label="Page1" />
-          <div style={{ flexGrow: 1 }} />
-          <Button
-            color="#ffffff"
-            onClick={() => {
-              router.push("/page2");
-            }}>
-            <PersonIcon />
-          </Button>
-        </Toolbar>
-      </AppBar>
       <main>{children}</main>
     </>
   );
@@ -56,18 +29,7 @@ const NavigationLayout = ({ children }) => {
 
 const NavigationLink = ({ href, label }) => {
   return (
-    <Link href={href} style={{ textDecoration: "none" }}>
-      <Typography
-        variant="body1"
-        sx={{
-          fontSize: "14px",
-          fontWeight: 500,
-          // textTransform: "uppercase",
-          color: "#fff",
-          padding: "0 10px", // Add padding on left and right
-        }}>
-        {label}
-      </Typography>{" "}
+    <Link>
     </Link>
   );
 };
