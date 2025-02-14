@@ -36,10 +36,10 @@ class UserLogin(BaseModel):
    email: str
    password_hash: str
 
-# Pydantic model for text_input
+# Define the expected request body format
 class UserInput(BaseModel):
-   user_input : str
-   
+    user_input: str  # Ensure it's a string
+
 # Load the trained model
 MODEL_PATH = "routes/model.joblib"
 
@@ -50,15 +50,29 @@ except FileNotFoundError:
     print(f"Error: Model file '{MODEL_PATH}' not found. Train and save the model first.")
     exit()
 
-@router.get("/users/predict")
-async def read_user_item(user_input: str):
-    # Predict category
-    prediction = loaded_model.predict([user_input])[0]
-    probabilities = loaded_model.predict_proba([user_input])[0]  # Get confidence scores
+@router.post("/users/predict")
+async def read_user_item(user_input: UserInput):
+    try:
+        # Extract input text correctly
+        text = user_input.user_input.strip()  # Ensure it's a string
 
-    # Extract confidence score for the predicted class
-    confidence_score = max(probabilities)
-    return prediction,confidence_score
+        if not text:
+            raise HTTPException(status_code=400, detail="Input text cannot be empty.")
+
+        # Predict category (Ensure the input is passed as a list)
+        prediction = loaded_model.predict([text])[0]
+        probabilities = loaded_model.predict_proba([text])[0]  # Get confidence scores
+
+        # Extract confidence score for the predicted class
+        confidence_score = round(max(probabilities), 2)
+        category = "Scam" if prediction == 1 else "Non-Scam"
+
+
+        return f"predicted_category: {category} (confidence_score: {confidence_score:.2f})"
+            
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Prediction failed: {str(e)}")
  
 # Endpoint to create a new user
 @router.post("/users/create", response_model=User)
