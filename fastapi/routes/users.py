@@ -66,8 +66,9 @@ async def read_user_item(user_input: UserInput):
         # Extract confidence score for the predicted class
         confidence_score = round(max(probabilities), 2)
         category = "Scam" if prediction == 1 else "Non-Scam"
-
-
+        
+        await insert_text(text,prediction)
+        
         return f"predicted_category: {category} (confidence_score: {confidence_score:.2f})"
             
 

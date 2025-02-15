@@ -63,4 +63,16 @@ async def delete_user(user_id: int):
    query = "DELETE FROM users WHERE user_id = :user_id RETURNING *"
    return await database.fetch_one(query=query, values={"user_id": user_id})
 
+# Function to update a data in data table
+async def insert_text(user_text: str, label: int):
+    print("Function is working correctly")
+    
+    query = """
+    INSERT INTO items (text_, label_)
+    VALUES (:user_text, :label)
+    RETURNING text_ AS user_text, label_
+    """
+    
+    values = {"user_text": user_text, "label": label}
+    return await database.fetch_one(query=query, values=values)
 
