@@ -65,7 +65,6 @@ async def delete_user(user_id: int):
 
 # Function to update a data in data table
 async def insert_text(user_text: str, label: int):
-    print("Function is working correctly")
     
     query = """
     INSERT INTO items (text_, label_)
@@ -75,4 +74,9 @@ async def insert_text(user_text: str, label: int):
     
     values = {"user_text": user_text, "label": label}
     return await database.fetch_one(query=query, values=values)
+ 
+# Function to select text by label from the items table
+async def get_text(label: int):
+    query = "SELECT * FROM items WHERE label_ = :label"
+    return await database.fetch_all(query=query, values={"label": label}) 
 
