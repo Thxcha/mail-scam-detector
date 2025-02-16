@@ -60,37 +60,37 @@ export default function AuthPage() {
       <Paper elevation={2} sx={{ width: "60%", padding: "20px", position: "relative" }}>
         <form onSubmit={handleScan}>
         {/* Text Input Box with Delete Icon */}
-        <Box sx={{ position: "relative" }}>
-          <TextField
-            fullWidth
-            multiline
-            minRows={6}
-            variant="outlined"
-            placeholder="Enter your text here..."
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                pr: "40px", // Space for delete icon
-              },
-              overflow: "auto",
-            }}
-          />
-          {/* Bin (Delete) Icon */}
-          {input.length > 0 && (
-            <IconButton
+          <Box sx={{ position: "relative" }}>
+            <TextField
+              fullWidth
+              multiline
+              minRows={6}
+              variant="outlined"
+              placeholder="Enter your text here..."
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
               sx={{
-                position: "absolute",
-                right: 10,
-                top: "50%",
-                transform: "translateY(-50%)",
+                "& .MuiOutlinedInput-root": {
+                  pr: "40px", // Space for delete icon
+                },
+                overflow: "auto",
               }}
-              onClick={() => setInput("")}
-            >
-              <DeleteIcon />
-            </IconButton>
-          )}
-        </Box>
+            />
+            {/* Bin (Delete) Icon */}
+            {input.length > 0 && (
+              <IconButton
+                sx={{
+                  position: "absolute",
+                  right: 10,
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                }}
+                onClick={() => setInput("")}
+              >
+                <DeleteIcon />
+              </IconButton>
+            )}
+          </Box>
 
         {/* Word & Character Counter */}
         <Typography variant="caption" display="block" align="left" sx={{ mt: 1, color: "gray" }}>
@@ -102,8 +102,8 @@ export default function AuthPage() {
             <Button variant="contained" color="primary" type="submit">
             Scan
             </Button>
-          </form>
           </Box>
+          </form>
       </Paper>
 
       {/* Snackbar Notifications */}
