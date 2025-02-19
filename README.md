@@ -19,6 +19,12 @@ Set database using query:
       label_ INT NOT NULL
    );
    ```
+   ```
+   CREATE TABLE IF NOT EXISTS labels_times (
+      label_ INT NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+   );
+   ```
 Open your browser and navigate to:
 
    ```

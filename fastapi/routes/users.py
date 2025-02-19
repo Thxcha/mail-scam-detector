@@ -68,6 +68,7 @@ async def read_user_item(user_input: UserInput):
         category = "Scam" if prediction == 1 else "Non-Scam"
         
         await insert_text(text,prediction)
+        await insert_label(prediction)
         
         return f"predicted_category: {category} (confidence_score: {confidence_score:.2f})"
             

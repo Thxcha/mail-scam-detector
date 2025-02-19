@@ -75,6 +75,17 @@ async def insert_text(user_text: str, label: int):
     values = {"user_text": user_text, "label": label}
     return await database.fetch_one(query=query, values=values)
  
+async def insert_label(label: int):
+    
+    query = """
+    INSERT INTO labels_times (label_)
+    VALUES (:label)
+    RETURNING label_,created_at
+    """
+    
+    values = {"label": label}
+    return await database.fetch_one(query=query, values=values)
+ 
 # Function to select text by label from the items table
 async def get_text(label: int):
     query = "SELECT * FROM items WHERE label_ = :label"
