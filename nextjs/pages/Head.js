@@ -41,77 +41,89 @@ export default function AuthPage() {
 };
 
   return (
-    <Grid
-      container
-      direction="column"
-      alignItems="center"
-      justifyContent="center"
-      style={{ height: "100vh", textAlign: "center" }}
-    >
+    <Box sx={{backgroundColor:"#F5F5F5",minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",padding: 4}}>
+      <Grid container spacing={3} maxWidth="md" justifyContent="center">
+
+      {/*Main Content Section*/ }
+        <Grid 
+          item xs = {12}>
+          <Paper
+            elevation ={2}
+            sx={{padding: 4,
+            borderRadius:2,
+            backgroundColor:"white",
+            textAlign:"center"}}>
+
       {/* Title & Subtitle */}
-      <Typography variant="h3" gutterBottom>
-          Mail Scam Detector
-      </Typography>
-      <Typography variant="body1" gutterBottom style={{ maxWidth: "600px" }}>
-        Place text for spam message scanning.
-      </Typography>
+          <Typography variant="h4" fontWeight="700" gutterBottom>
+            Mail Scam Detector
+          </Typography>
+          <Typography variant="body2" color="gray" gutterBottom >
+            Place text for scam message scanning.
+          </Typography>
 
-      {/* Input Box Container */}
-      <Paper elevation={2} sx={{ width: "60%", padding: "20px", position: "relative" }}>
-        <form onSubmit={handleScan}>
-        {/* Text Input Box with Delete Icon */}
-          <Box sx={{ position: "relative" }}>
-            <TextField
-              fullWidth
-              multiline
-              minRows={6}
-              variant="outlined"
-              placeholder="Enter your text here..."
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  pr: "40px", // Space for delete icon
-                },
-                overflow: "auto",
-              }}
-            />
-            {/* Bin (Delete) Icon */}
-            {input.length > 0 && (
-              <IconButton
+        {/* Input Box Container */}
+        <Box sx ={{position:"relative",maxHeight:200, overflowY: "auto", mt: 2 }}>
+          {/* Text Input Box with Delete Icon */}
+            <Box sx={{ position: "relative" ,maxHeight:200,overflowY:"auto"}}>
+              <TextField
+                fullWidth
+                multiline
+                minRows={6}
+                variant="outlined"
+                placeholder="Enter your text here..."
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
                 sx={{
-                  position: "absolute",
-                  right: 10,
-                  top: "50%",
-                  transform: "translateY(-50%)",
+                    maxHeight:200,
+                    overflowY: "auto"
+                  
                 }}
-                onClick={() => setInput("")}
-              >
-                <DeleteIcon />
-              </IconButton>
-            )}
-          </Box>
+              />
+              {/* Bin (Delete) Icon */}
+              {input.length > 0 && (
+                <IconButton
+                  sx={{
+                    position: "absolute",
+                    right: 8,
+                    top: 8,
+                    backgroungColor:"#f5f5f5","&:hover":
+                    {backgroungColor:"#e0e0e0"}
+                  }}
+                  onClick={() => setInput("")}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              )}
+            </Box>
 
-        {/* Word & Character Counter */}
-        <Typography variant="caption" display="block" align="left" sx={{ mt: 1, color: "gray" }}>
-          {input.length} characters 
-        </Typography>
+          {/* Word & Character Counter */}
+          <Typography variant="caption" display="block" align="left" sx={{ mt: 1, color: "gray" }}>
+            {input.length} characters 
+          </Typography>
 
-        {/* Buttons */}
-          <Box sx={{ display: "flex", justifyContent: "center", gap: 2, mt: 2 }}>
-            <Button variant="contained" color="primary" type="submit">
-            Scan
-            </Button>
-          </Box>
-          </form>
-      </Paper>
-
-      {/* Snackbar Notifications */}
-      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleSnackbarClose}>
-        <Alert onClose={handleSnackbarClose} severity={snackbarSeverity} sx={{ width: "100%" }}>
-          {snackbarMessage}
-        </Alert>
-      </Snackbar>
+          {/* Buttons */}
+          <Button 
+            variant="contained" 
+            sx={{ backgroundColor: "black", color: "white",borderRadius:"8px",marginTop:"16px","&:hover": { backgroundColor: "#333" } }} 
+            fullWidth 
+            style={{ marginTop: '16px' }} 
+            type="submit"
+            >
+            SCAN
+        </Button>
+            </form>
+        
+          </Paper>
+        </Grid>  
     </Grid>
+
+        {/* Snackbar Notifications */}
+        <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleSnackbarClose}>
+          <Alert onClose={handleSnackbarClose} severity={snackbarSeverity} sx={{ width: "100%" }}>
+            {snackbarMessage}
+          </Alert>
+        </Snackbar>zzzzzzzzzz
+    </Box>
   );
 }
