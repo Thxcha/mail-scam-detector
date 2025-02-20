@@ -49,7 +49,7 @@ export default function AuthPage() {
                         </Typography>
 
                         {/* Input Section */}
-                        <Box sx={{ position: "relative", maxHeight: 200, overflowY: "auto", mt: 2 }}>
+                        <Box sx={{ position: "relative", maxHeight: 200,maxWidth: 500 ,overflowY: "hidden", mt: 2 }}>
                             <TextField
                                 fullWidth
                                 multiline
@@ -58,16 +58,16 @@ export default function AuthPage() {
                                 placeholder="Enter your text here..."
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
-                                sx={{ pr: "50px" ,"&.MuiOutlinedInput-root":
-                                    {paddingRight: "50px",},
+                                sx={{ maxHeight: 200,
+                                      overflowY: "auto",
                                 }} 
                             />
                             {input.length > 0 && (
                                 <IconButton
                                     sx={{
                                         position: "absolute",
-                                        right: 20, // Adjusts the position
-                                        top: 27,
+                                        right: 15, // Adjusts the position
+                                        top: 30,
                                         transform:"translateY(-50%)",
                                         backgroundColor: "#F5F5F5",
                                         "&:hover": { backgroundColor: "#E0E0E0" }
