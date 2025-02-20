@@ -59,7 +59,7 @@ export default function AuthPage() {
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
                                 sx={{ maxHeight: 200,
-                                      overflowY: "auto",
+                                      overflowY: "hidden",
                                 }} 
                             />
                             {input.length > 0 && (
