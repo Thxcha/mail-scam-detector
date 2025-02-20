@@ -49,7 +49,7 @@ export default function AuthPage() {
                         </Typography>
 
                         {/* Input Section */}
-                        <Box sx={{ position: "relative", maxHeight: 200,maxWidth: 500 ,overflowY: "hidden", mt: 2 }}>
+                        <Box sx={{ position: "relative", maxHeight: 200,maxWidth: 500 ,overflowY: "auto",overflowX:"hidden" ,mt: 2 }}>
                             <TextField
                                 fullWidth
                                 multiline
@@ -59,7 +59,7 @@ export default function AuthPage() {
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
                                 sx={{ maxHeight: 200,
-                                      overflowY: "hidden",
+                                      overflowY: "scroll",
                                 }} 
                             />
                             {input.length > 0 && (
