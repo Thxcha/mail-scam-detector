@@ -124,7 +124,7 @@ export default function AuthPage() {
       </Grid>
 
       {/* HOW TO USE SECTION */}
-      <Box sx={{ width: "100%", backgroundColor: "#FAFAFA", padding: "80px 0", marginTop: 8 }}>
+      <Box sx={{ width: "100%", backgroundColor: "#FAFAFA", padding: "80px 0", marginTop: 30 }}>
         <Typography variant="h3" fontWeight="700" textAlign="center" sx={{ marginBottom: 8 }}>
           How To Use Mail Scam Detector
         </Typography>
@@ -163,12 +163,12 @@ const steps = [
   {
     title: "Click Scan",
     description: "Press the scan button to analyze the message for scam indicators.",
-    image: "/images/step2.png",
+    image: "/image/scan.png",
   },
   {
     title: "Get Your Results",
     description: "The AI will detect if the message contains any scam patterns.",
-    image: "/images/step3.png",
+    image: "image/done.png",
   }
 ];
 
