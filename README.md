@@ -1,6 +1,3 @@
-# Next.js + FastAPI + PostgreSQL Starter Project
-
-
 ## Getting Started
 
 ### Installation
