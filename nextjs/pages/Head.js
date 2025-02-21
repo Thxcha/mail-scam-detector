@@ -157,8 +157,9 @@ const steps = [
   {
     title: "Paste Your Message",
     description: "Copy and paste the suspicious email or message you received.",
-    image: "",
+    image: "image/enter_text.png",  // 👈 Hosted image URL
   },
+
   {
     title: "Click Scan",
     description: "Press the scan button to analyze the message for scam indicators.",
