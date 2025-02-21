@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Button, Grid, Typography, Paper, Snackbar, Alert, Box, IconButton } from "@mui/material";
+import { Button, Grid, Typography, Paper, Snackbar, Alert, Box, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function AuthPage() {
@@ -54,7 +54,7 @@ export default function AuthPage() {
                 position: "relative",
                 maxWidth: 800,
                 minHeight: 200,
-                border: "2px solid #ddd",  //  Outer border stays
+                border: "2px solid #ddd",
                 borderRadius: "12px",
                 backgroundColor: "white",
                 padding: 2,
@@ -71,11 +71,11 @@ export default function AuthPage() {
                   maxHeight: "250px",
                   fontSize: "16px",
                   lineHeight: "1.5",
-                  border: "none",  // Removes default textarea border
-                  outline: "none", //  Prevents focus outline
+                  border: "none",
+                  outline: "none",
                   padding: "12px",
-                  resize: "none",  //  Disables manual resizing
-                  overflowY: "auto",  //  Enables vertical scrolling
+                  resize: "none",
+                  overflowY: "auto",
                   backgroundColor: "transparent",
                   fontFamily: "inherit",
                 }}
@@ -124,14 +124,22 @@ export default function AuthPage() {
       </Grid>
 
       {/* HOW TO USE SECTION */}
-      <Box sx={{ width: "100%", backgroundColor: "#FAFAFA", padding: "60px 0", marginTop: 8 }}>
-        <Typography variant="h3" fontWeight="700" textAlign="center" sx={{ marginBottom: 5 }}>
+      <Box sx={{ width: "100%", backgroundColor: "#FAFAFA", padding: "80px 0", marginTop: 8 }}>
+        <Typography variant="h3" fontWeight="700" textAlign="center" sx={{ marginBottom: 8 }}>
           How To Use Mail Scam Detector
         </Typography>
 
-        {steps.map((step, index) => (
-          <StepCard key={index} step={step} index={index} />
-        ))}
+        <Grid container spacing={8} maxWidth="lg" margin="auto">
+          {steps.map((step, index) => (
+            <StepCard
+              key={index}
+              stepNumber={index + 1}
+              image={step.image}
+              title={step.title}
+              description={step.description}
+            />
+          ))}
+        </Grid>
       </Box>
 
       {/* Snackbar Notifications */}
@@ -149,48 +157,78 @@ const steps = [
   {
     title: "Paste Your Message",
     description: "Copy and paste the suspicious email or message you received.",
-    image: "/your-screenshot-image.png",
+    image: "",
   },
   {
     title: "Click Scan",
     description: "Press the scan button to analyze the message for scam indicators.",
-    image: "/your-screenshot-image.png",
+    image: "/images/step2.png",
   },
   {
     title: "Get Your Results",
     description: "The AI will detect if the message contains any scam patterns.",
-    image: "/your-screenshot-image.png",
+    image: "/images/step3.png",
   }
 ];
 
-// Reusable Step Component
-const StepCard = ({ step, index }) => {
-  return (
-    <Grid container spacing={3} alignItems="center" justifyContent="center" maxWidth="lg" sx={{ marginBottom: 6 }}>
-      {index % 2 === 0 ? (
-        <>
-          <StepImage image={step.image} />
-          <StepText title={step.title} description={step.description} />
-        </>
-      ) : (
-        <>
-          <StepText title={step.title} description={step.description} />
-          <StepImage image={step.image} />
-        </>
-      )}
+// StepCard Component
+const StepCard = ({ stepNumber, image, title, description }) => (
+  <Grid 
+    container 
+    spacing={4} 
+    alignItems="center" 
+    justifyContent="center" 
+    sx={{ flexDirection: { xs: "column", md: stepNumber % 2 === 0 ? "row-reverse" : "row" } }}
+  >
+    {/* Image Section */}
+    <Grid item xs={12} md={6}>
+      <Paper
+        elevation={3}
+        sx={{
+          padding: 3,
+          borderRadius: "16px",
+          border: "2px solid black",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <img src={image} alt="Step Image" style={{ width: "100%", borderRadius: "12px" }} />
+      </Paper>
     </Grid>
-  );
-};
 
-const StepText = ({ title, description }) => (
-  <Grid item xs={12} md={4}>
-    <Typography variant="h5" fontWeight="700">{title}</Typography>
-    <Typography variant="body1" sx={{ mt: 1 }}>{description}</Typography>
-  </Grid>
-);
-
-const StepImage = ({ image }) => (
-  <Grid item xs={12} md={6}>
-    <img src={image} alt="Step Image" style={{ width: "100%", maxWidth: "500px", borderRadius: "8px" }} />
+    {/* Text Section */}
+    <Grid item xs={12} md={5}>
+      <Paper
+        elevation={3}
+        sx={{
+          padding: 4,
+          borderRadius: "16px",
+          backgroundColor: "#F5F5F5",
+          display: "flex",
+          flexDirection: "column",
+          gap: 2,
+        }}
+      >
+        <Box
+          sx={{
+            width: 40,
+            height: 40,
+            backgroundColor: "black",
+            color: "white",
+            fontSize: "18px",
+            fontWeight: "bold",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: "50%",
+          }}
+        >
+          {stepNumber}
+        </Box>
+        <Typography variant="h5" fontWeight="700">{title}</Typography>
+        <Typography variant="body1">{description}</Typography>
+      </Paper>
+    </Grid>
   </Grid>
 );
