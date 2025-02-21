@@ -79,10 +79,15 @@ async def read_user_item(user_input: UserInput):
 @router.get("/users/label/{label}")
 async def read_text(label: int):
     result = len(await get_text(label))  # This will work now
-    
     if result == 0:
         raise HTTPException(status_code=404, detail="Text not found")
     return result
+
+@router.get("/users/label_date/{label}/{time}")
+async def read_date_label(label: int, time: int):
+    result = len(await get_label_date(label,time))  # This will work now
+    return result
+
 # Endpoint to create a new user
 @router.post("/users/create", response_model=User)
 async def create_user(user: UserCreate):

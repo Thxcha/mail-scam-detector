@@ -1,4 +1,7 @@
 from databases import Database
+from datetime import date, datetime, timedelta, time as dt_time
+
+today = datetime.today()
 
 
 POSTGRES_USER = "temp"
@@ -90,4 +93,26 @@ async def insert_label(label: int):
 async def get_text(label: int):
     query = "SELECT * FROM items WHERE label_ = :label"
     return await database.fetch_all(query=query, values={"label": label}) 
+ 
+ # Function to select label by label and time from the labels_times table
+async def get_label_date(label: int, time: int):
+    # Calculate the target date based on 'time' days ago
+    ntime = timedelta(days=time)
+    today = datetime.now()
+    target_date = today - ntime
+    start_datetime = datetime.combine(target_date.date(), dt_time.min)  # 00:00:00
+    end_datetime = datetime.combine(target_date.date(), dt_time.max)
+    
+    # SQL query with matching placeholder names
+    query = """
+        SELECT label_
+        FROM labels_times
+        WHERE label_ = :label 
+         AND created_at BETWEEN :start_datetime AND :end_datetime
+    """
+    # Execute the query with the correct parameters
+    return await database.fetch_all(
+        query=query,
+        values={"label": label, "start_datetime": start_datetime, "end_datetime": end_datetime}
+    )
 
